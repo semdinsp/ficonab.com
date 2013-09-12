@@ -6,9 +6,9 @@ strategies
   strategies/lumpy_streams
 technotes
   technotes/index
+  technotes/heroku
   technotes/bootstrapv3
   technotes/resque
   technotes/sendmail
   technotes/coffeescript
-  technotes/heroku
 contact
