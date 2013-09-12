@@ -10,4 +10,5 @@ technotes
   technotes/resque
   technotes/sendmail
   technotes/coffeescript
+  technotes/heroku
 contact

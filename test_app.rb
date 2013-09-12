@@ -33,7 +33,7 @@ class FiconabTest < Test::Unit::TestCase
             }
    end
    def test_technotes_pages
-      pagelist=["bootstrapv3","coffeescript","resque","sendmail"]
+      pagelist=["bootstrapv3","coffeescript","resque","sendmail", "heroku"]
       pagelist.each { |page| 
            get "technotes/#{page}"
            assert last_response.ok?, "technotes/#{page} not found"

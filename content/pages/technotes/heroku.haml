@@ -1,0 +1,21 @@
+Categories: Technical Notes
+Template: home
+Summary: Migrating to heroku
+Date: 14 September 2013
+
+.container
+  .row
+    .col-lg-9
+      %h2 Migratiing to heroku
+      %p  I was very pleased to be able to migrate this app to heroku in about 50 minutes from initial signup.  The only challenge was figuring out the heroku domains command and linking the cname to the heroku apps.  The cname needs to point to appname.herokuapp.com.  THe ap name is controlled through the heroku domains command.  Next step to have travis push to heroku
+      :markdown
+        The commands i used included..
+
+            heroku domains:add www.ficonab.com
+            heroku apps
+            heroku ps
+            heroku apps:rename ficonab.com
+            heroku ps:scale web=1
+            git push heroku master
+    .col-lg-3
+      = haml :technote_menu, :layout => false
