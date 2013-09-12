@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/semdinsp/ficonab.com.png)](https://travis-ci.org/semdinsp/ficonab.com)
-[![Code Climate](https://codeclimate.com/github/semdinsp/ficonab.com.png)](https://codeclimate.com/github/semdinsp/ficonab.com)
+[![Code Climate](https://codeclimate.com/repos/52314d7813d63761d202d09f/badges/a5c18005738a6fb4fb32/gpa.png)](https://codeclimate.com/repos/52314d7813d63761d202d09f/feed)
 
 # These are the public websites for ficonab
 They use nesta cms as a basic platform and haml for markdown.
