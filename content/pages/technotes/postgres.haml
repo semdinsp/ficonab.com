@@ -1,0 +1,24 @@
+Categories: Technical Notes
+Template: home
+Summary: Postgres basic commands
+Date: 14 September 2013
+
+.container
+  .row
+    .col-lg-9
+      %h1 Migrating to postgres
+      %p  Notes on migrating to postgres.
+      :markdown
+        The commands i used included..
+
+            create database pos_development;
+            create database pos_test
+            create user travis with password '';
+            alter user travis with createdb;
+            GRANT ALL PRIVILEGES ON DATABASE 'pos_test' to travis
+            
+    .col-lg-3
+      = haml :technote_menu, :layout => false
+
+
+
