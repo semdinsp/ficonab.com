@@ -33,7 +33,7 @@ class FiconabTest < Test::Unit::TestCase
             }
    end
    def test_technotes_pages
-      pagelist=["bootstrapv3","coffeescript","resque","sendmail", "heroku", "postgres"]
+      pagelist=["bootstrapv3","coffeescript","resque","sendmail", "heroku","postgres", "postgres", "bunny-amqp"]
       pagelist.each { |page| 
            get "technotes/#{page}"
            assert last_response.ok?, "technotes/#{page} not found"
@@ -48,8 +48,5 @@ class FiconabTest < Test::Unit::TestCase
              #assert_equal last_response.body.includes? 'Ficonab Pte. Ltd.'
                }
       end
-  #def test_it_says_hello_to_a_person
-  #  get '/', :name => 'Simon'
-  #  assert last_response.body.include?('Simon')
-  # end
+  
 end

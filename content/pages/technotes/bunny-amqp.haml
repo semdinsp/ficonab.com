@@ -1,0 +1,43 @@
+Categories: Technical Notes
+Template: home
+Summary: Ruby AMPQ Gem to simplify background bunny jobs
+Date: 1 August 2013
+
+.container
+  .row
+    .col-md-9  
+      %h1 estorm-message-processor
+
+      %p 
+        I created a publicly available gem estorm-message-processor to simplify the creation of AMQP scripts to process messages.  Full details are on 
+        %a(href="http://github.com/semdinsp/estorm-message-processor") estorm-message-processor source.
+        This gem simplifies the development of scripts which either process messages for ever or process messages on demand.  It uses a call back processor concept so that you can send many different types of commands to the message processor.
+
+      :markdown
+        ###Setup delegate processor
+        This is the callback processor in the consumer.  Just define your methods in your script with the name of procedure like delegate_XXXXX
+        Code:
+
+            class EstormMessageProcessor::Consumer
+            def delegate_sendtemplates(cmdhash)
+            p=Promotion.find(cmdhash['promotion'].to_i)
+            data=YAML.load(p.data)
+            data.each { |entry| 
+            cc=CustomerContact.create_and_send_template(entry['email'],entry,p.configuration_setting,p) if entry!=nil and entry['email']!=nil           }
+            end
+            end
+
+        ###Start the Message Processor
+        Code:
+
+            begin
+            config={:url => AMQPURL,:connecturlflag=> Rails.env.production? ,:queuename => CONTACT_MESSAGE, :blocking => true, :consumer_name => "test consumer"}
+            EstormMessageProcessor::Base.logger=Logger.new(STDOUT)   
+            mp = EstormMessageProcessor::Base.new
+            mp.start(config)  # THIS MAY NEED TO BE IN a THREAD
+            rescue Exception => ex
+            end
+
+
+    .col-md-3
+      = haml :technote_menu, :layout => false

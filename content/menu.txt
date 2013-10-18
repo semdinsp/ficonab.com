@@ -8,6 +8,7 @@ technotes
   technotes/index
   technotes/heroku
   technotes/postgres
+  technotes/bunny-amqp
   technotes/bootstrapv3
   technotes/resque
   technotes/sendmail
