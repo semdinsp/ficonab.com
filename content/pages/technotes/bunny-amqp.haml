@@ -15,7 +15,7 @@ Date: 1 August 2013
 
       :markdown
         ###Setup delegate processor
-        This is the callback processor in the consumer.  Just define your methods in your script with the name of procedure like delegate_XXXXX
+        This is the callback processor in the consumer.  Just define your methods in your script with the name of procedure like delegate_XXXXX. Send the queue a message with a hash and any transport variables you want to send.  {'command'=>'sendtemplates', 'promotion'=>self.id.to_s}.  See the how command is linked to the name of the delegate?
         Code:
 
             class EstormMessageProcessor::Consumer

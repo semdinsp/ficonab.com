@@ -25,7 +25,9 @@ class FiconabTest < Test::Unit::TestCase
   end
 
   def test_key_pages
+     
      pagelist=["contact","about","technotes","strategies","strategies/value", "/"]
+     puts "testing top level pages #{pagelist.inspect}"
      pagelist.each { |page| 
           get page
           assert last_response.ok?, "#{page} not found"
@@ -33,7 +35,8 @@ class FiconabTest < Test::Unit::TestCase
             }
    end
    def test_technotes_pages
-      pagelist=["bootstrapv3","coffeescript","resque","sendmail", "heroku","postgres", "postgres", "bunny-amqp"]
+      pagelist=["bootstrapv3","coffeescript","resque","sendmail", "heroku","postgres", "postgres", "bunny-amqp","email-authentication"]
+      puts "testing tech note pages #{pagelist.inspect}"
       pagelist.each { |page| 
            get "technotes/#{page}"
            assert last_response.ok?, "technotes/#{page} not found"
@@ -42,6 +45,7 @@ class FiconabTest < Test::Unit::TestCase
     end
     def test_strategies_pages
         pagelist=["geographic","value","lumpy_streams"]
+        puts "testing strategy pages #{pagelist.inspect}"
         pagelist.each { |page| 
              get "strategies/#{page}"
              assert last_response.ok?, "strategies/#{page} not found"

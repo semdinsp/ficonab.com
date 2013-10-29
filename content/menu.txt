@@ -9,6 +9,7 @@ technotes
   technotes/heroku
   technotes/postgres
   technotes/bunny-amqp
+  technotes/email-authentication
   technotes/bootstrapv3
   technotes/resque
   technotes/sendmail

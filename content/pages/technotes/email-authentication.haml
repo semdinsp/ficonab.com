@@ -1,0 +1,26 @@
+Categories: Technical Notes
+Template: home
+Summary: Validate or authenticate email addresses
+Date: 29 October 2013
+
+.container
+  .row
+    .col-md-9  
+      %h1 email-authentication gem
+
+      %p 
+        I created a publicly available gem email-authentication to simplify the validation of emails  Full details are on 
+        %a(href="http://github.com/semdinsp/email-authentication") email-authentication source.
+        I have been using Amazon SES for years and was not keeping updated with their improvements to the system.  Eventually I needed to update my email processing system to handle SNS notifications and also found that my lists were bouncing a lot.  This gem attempts to authenticate an email address by checking the format, mx record and if the mx server accepts the recipient address.
+
+      :markdown
+        ###Usage
+        Usage is very simple, a from address and a two address.  The gem also comes with a binary file that you can use.
+        Code:
+
+             success,msgs=EmailAuthentication::Base.check('an email adresss','from address')
+
+
+
+    .col-md-3
+      = haml :technote_menu, :layout => false
