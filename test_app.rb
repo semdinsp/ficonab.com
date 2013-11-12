@@ -35,7 +35,7 @@ class FiconabTest < Test::Unit::TestCase
             }
    end
    def test_technotes_pages
-      pagelist=["bootstrapv3","coffeescript","resque","sendmail", "heroku","postgres", "postgres", "bunny-amqp","email-authentication"]
+      pagelist=["bootstrapv3","coffeescript","nestacms-locales","resque","sendmail", "heroku","postgres", "postgres", "bunny-amqp","email-authentication"]
       puts "testing tech note pages #{pagelist.inspect}"
       pagelist.each { |page| 
            get "technotes/#{page}"
