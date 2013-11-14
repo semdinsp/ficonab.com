@@ -7,8 +7,69 @@ Date: 7 Novbmer 2013
   .row
     .col-md-9
       %h1 Internationalize NestaCMS
+      
       :markdown
-        This was reasonably simple to do.  Please check the following site for full details [tl lotto](http://github.com/semdinsp/tl-lotto-com).  I have attached the update app.rb file below for full details. The key items were adding i8N o gemfile, using sessions and creating a post route for the language. I also had to update the Page class so that any translations would be added to the menus.
+        #Internationalising Nestacms
+        See the following website to get an easy version of [app.rb](https://github.com/semdinsp/tl-lotto-com/blob/master/app.rb)
+        I needed a simple website that I could internationalise to support english, bahasa and tetum.   I had some experience with rails but have been very happy using Nesta for simple sites.  So I plugged away at getting this to work and eventually  I only had to update the app.rb file to enable this.
+
+        ##gem
+        The updates to  Nesta are getting the iI8N gem installed.  The locale files are installed in config/locales (like rails but clearly you can change this below) 
+            Gemfile add: gem 'i18n'
+        In app.rb add
+            require 'i18n'
+            require 'i18n/backend/fallbacks'
+            configure do
+            I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
+            I18n.load_path=Dir[File.join(settings.root, 'config/locales', '*.yml')]
+            I18n.backend.load_translations
+            I18n.locale = 'en'
+            end
+
+        ##Headers
+        Making sure that the page headers are translated before they are shown on the site  (Nesta grabs the first h1 value on each page to set the headers on the website) I added the last two lines to the default Page.heading code.  This evaluates the h1 command and currently ONLY WORKS for haml.  (eg %h1  next line = = I18n.translate('index.heading') )
+            class Page
+            def heading
+            regex = case @format
+            when :mdown
+            /^#\s*(.*?)(\s*#+|$)/
+            when :haml
+            /^\s*%h1\s+(.*)/
+            when :textile
+            /^\s*h1\.\s+(.*)/
+            end
+            markup =~ regex
+            val=Regexp.last_match(1) or raise HeadingNotSet 
+            val=eval(val[1..val.size]) if val[0]=='='
+            val
+            end
+            end
+
+        ##Language route
+        enabling a route to allow the language to be changed.  This is obvious and stores the language in the session.  
+            post '/lang/:id' do
+            lang=params[:id]
+            if ['en','tet','ba'].include?(lang)
+            I18n.locale = lang 
+            session[:language]=lang 
+            end
+            redirect to('/')
+            end
+
+        ##Sessions
+        enabling sessions  (app.rb) enable :sessions.  And update the before do code so that the language is set automatically.
+            before do
+            if request.path_info =~ Regexp.new('./$')
+            redirect to(request.path_info.sub(Regexp.new('/$'), ''))
+            end
+            I18n.locale = session[:language] if session[:language]!=nil
+            end
+
+
+        ## Entire File:
+        Putting it all together looks like: [nesta](http://www.ficonab.com/technotes/nestacms-locales)
+        
+        This was reasonably simple to do.  Please check the following site for full details [tl lotto](https://github.com/semdinsp/tl-lotto-com/blob/master/app.rb).  I have attached the update app.rb file below for full details. The key items were adding i8N o gemfile, using sessions and creating a post route for the language. I also had to update the Page class so that any translations would be added to the menus.
       
       %pre
         %code
