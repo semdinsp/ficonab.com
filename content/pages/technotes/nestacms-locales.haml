@@ -57,7 +57,9 @@ Date: 7 Novbmer 2013
             end
 
         ##Sessions
-        enabling sessions  (app.rb) enable :sessions.  And update the before do code so that the language is set automatically.
+        enabling sessions  (app.rb) enable :sessions.  And update the before do code so that the language is set automatically. I also had toe set the session secret to get this to work.
+            set :session_secret, "somesecret"
+            enable :sessions
             before do
             if request.path_info =~ Regexp.new('./$')
             redirect to(request.path_info.sub(Regexp.new('/$'), ''))
@@ -79,6 +81,7 @@ Date: 7 Novbmer 2013
           cache haml("404".to_sym)
           end
           enable :sessions
+          set 
           before do
           if request.path_info =~ Regexp.new('./$')
           redirect to(request.path_info.sub(Regexp.new('/$'), ''))
