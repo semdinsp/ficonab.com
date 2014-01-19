@@ -1,0 +1,24 @@
+Title: Skiing update
+Template: home
+Layout: home
+Link text: Skiing Dashboard
+
+:javascript
+  var Dash = {
+  nextIndex: 0,
+  dashboards: [
+  {url: "http://www.avalanche.ca/cac/bulletins/latest/kootenay-boundary", time: 20},
+  {url: "http://www.weather.com/sports-rec/ski/forecast/336:11:US?ol=CAXX0410:1:CA", time: 20},
+  {url: "http://www.redresort.com/mountain/report/", time: 20}
+  ],
+  display: function()
+  {
+  var dashboard = Dash.dashboards[Dash.nextIndex];
+  frames["displayArea"].location.href = dashboard.url;
+  Dash.nextIndex = (Dash.nextIndex + 1) % Dash.dashboards.length;
+  setTimeout(Dash.display, dashboard.time * 1000);
+  }
+  };
+  window.onload = Dash.display;
+  
+%iframe(name="displayArea" width="100%" height="100%")
