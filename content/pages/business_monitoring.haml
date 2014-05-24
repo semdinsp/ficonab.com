@@ -1,0 +1,24 @@
+Title: Business Monitoring
+Template: home
+Layout: home
+Link text: Monitoring Dashboards
+
+:javascript
+  var Dash = {
+  nextIndex: 0,
+  dashboards: [
+  {url: "https://teds-dashboard-public.herokuapp.com/lotto", time: 40},
+  {url: "https://tl-sms-dashboard-public.herokuapp.com/lotto", time: 40},
+  {url: "https://estorm-sms.herokuapp.com", time: 40}
+  ],
+  display: function()
+  {
+  var dashboard = Dash.dashboards[Dash.nextIndex];
+  frames["displayArea"].location.href = dashboard.url;
+  Dash.nextIndex = (Dash.nextIndex + 1) % Dash.dashboards.length;
+  setTimeout(Dash.display, dashboard.time * 1000);
+  }
+  };
+  window.onload = Dash.display;
+  
+%iframe(name="displayArea" width="100%" height="100%")
