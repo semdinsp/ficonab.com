@@ -16,6 +16,17 @@ Date: 14 September 2013
             create user travis with password '';
             alter user travis with createdb;
             GRANT ALL PRIVILEGES ON DATABASE 'pos_test' to travis
+      %h1 Manual backup postgres
+      %p  Backing up postress.
+      :markdown
+        The commands i used included..
+
+            heroku pg:psql --app yyyyy-sms
+            estorm-sms::ROSE=> \copy xxxxx to '~/Documents/9dbbackup/estorm-sms/xxxxx.csv' DELIMITER ',' CSV HEADER;
+            estorm-sms::ROSE=> \copy yyyy to '~/Documents/9dbbackup/estorm-sms/yyyy.csv' DELIMITER ',' CSV HEADER;
+            \copy (select entries.*,customers.identity from entries inner  join customers on entries.customer_id=customers.id where entries.created_at > '2014-05-01' and entries.created_at < '2014-11-01') to '~/Documents/9dbba
+            RUBY
+            Entry.older_six_months.destroy_all (to delete entries after where older_months is a scope)
             
     .col-md-3
       = haml :technote_menu, :layout => false

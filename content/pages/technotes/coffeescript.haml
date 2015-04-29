@@ -8,10 +8,11 @@ Date: 10 July 2011
     .col-md-9  
       %h1 Compile coffeescript to javascript
 
-      %p On my mac compiling coffeescript to javascript was not self evident.  I did it by entering rails console and then running the following commands
+      %p On my mac compiling coffeescript to javascript was not self evident.  I did it by entering rails console or irb and then running the following commands
 
       %pre
         %code 
+          require 'coffee-script'
           res=CoffeeScript.compile File.read("application.coffee")
           File.open('application.js', 'w') { |file| file.write(res) }
         
