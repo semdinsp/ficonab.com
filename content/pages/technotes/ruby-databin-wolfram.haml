@@ -1,0 +1,35 @@
+Categories: Technical Notes
+Template: home
+Summary: How to post from ruby to a mathematica wolfram databin
+Date: 10 July 2011
+
+.container
+  .row
+    .col-md-9  
+      %h1 Databin wolfram via ruby
+
+      %p THis seems to work well.  The only challenge is that when pulling the data down from the databin the event series values needs to be converted to numbers using the ToExpression.  Just throw the data into the query hash and the bin is the bin shortid
+
+      %pre
+        %code 
+            url="https://datadrop.wolframcloud.com/api/v1.0/Add?"
+            query= {bin: bin, revenue: revenue, transaction_count: transaction_count, distributors: distributors, average: avg}
+            res=''
+                begin
+                Timeout::timeout(40) do    
+                @uri=URI.parse(url)
+                 # original res=self.clnt.get_content(self.uri,self.extheader)
+                 clnt = HTTPClient.new
+                 res=clnt.get(@uri,query)
+                 end
+                 rescue  Exception => e
+                 puts "Exception: #{e.inspect}"
+                 ensure
+                 puts "result: #{res.inspect}   query #{u}bin: #{bin}  url: #{url}"
+                 end
+                end
+
+
+    .col-md-3
+      = haml :technote_menu, :layout => false
+
