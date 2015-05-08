@@ -14,6 +14,7 @@ technotes
   technotes/resque
   technotes/sendmail
   technotes/ruby-data-wolfram
+  technotes/wolfram-cloud-email
   technotes/coffeescript
   technotes/nestacms-locales
 contact

@@ -1,0 +1,45 @@
+Categories: Technical Notes
+Template: home
+Summary: Wolfram cloud emails scheduled task
+Date: 10 July 2011
+
+.container
+  .row
+    .col-md-9  
+      %h1 Email via scheduled tasks (mathematica/wolfram)
+
+      %p THe scheduled task demos for Mathematica to run in the cloud are not very helpful if you want to use your own code.  It is not clear on how to get things working and where you need to include the functions.  I have been able to get it working using a 'WITH' statement and defining functions in the scheduled task.
+      %p "WITH" where i define the local variables separated by ,  (comma)
+      %p I define my modules (my functions) in the scheduled task and separate by ; (semi colon)
+      %p Note that processEvent is interesting as it fixes a problem with the wolfram databin returning values as String.  I convert the values to integers using ToExpression and then I am able to plot them using the normal EventSeries.
+
+      %pre
+        %code 
+            dailyDashCloudObject = 
+            With[{shortid = "xxxxxx", dbin = Databin[shortid], 
+                ccDestinations = {"yyyyy@ficonab.com"}, 
+                CloudDeploy[
+                ScheduledTask[
+                    processEvent[evt_TemporalData] := 
+                    Module[{dates, vals, series, i}, dates = evt["Dates"];
+                    series = {evt["Dates"][[#, 1]], 
+                    ToExpression[evt["Values"][[#]]]} & /@ 
+                    Table[i, {i, Length[evt["Values"]]}];
+                    EventSeries[series]
+                    ]; 
+                plotDatabin[db_Databin, tag_String] := 
+                    Module[{}, 
+                    DateListPlot[processEvent[EventSeries[db][tag]], 
+                    PlotLabel -> tag]]; 
+                    SendMail[<|"To" -> $WolframID, "Cc" -> ccDestinations, 
+                    "Subject" -> StringJoin["Daily Dash Report ", DateString[]], 
+                    "Body" -> 
+                    GraphicsGrid[{{plotDatabin[dbin, "revenue"], 
+                    plotDatabin[dbin, "fred"]}, {plotDatabin[dbin, 
+                    "fred2"]}}, ImageSize -> Large] |>], 
+                  "Daily"], "dailyDashBoardEmail"] ]
+
+
+    .col-md-3
+      = haml :technote_menu, :layout => false
+
