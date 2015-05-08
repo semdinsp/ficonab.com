@@ -13,7 +13,7 @@ technotes
   technotes/bootstrapv3
   technotes/resque
   technotes/sendmail
-  technotes/ruby-data-wolfram
+  technotes/ruby-databin-wolfram
   technotes/wolfram-cloud-email
   technotes/coffeescript
   technotes/nestacms-locales
