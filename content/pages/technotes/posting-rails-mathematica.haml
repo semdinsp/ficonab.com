@@ -1,0 +1,29 @@
+Categories: Technical Notes
+Template: home
+Summary: Postin to rails from mathematica
+Date: 26 June 2015
+
+.container
+  .row
+    .col-md-9  
+      %h1 How to post from mathematica to rails application using json.
+
+      %p This was a three hour hit and miss session to get working so I thought i would share it.
+      :markdown
+        #Using curl
+        Code:
+
+            curl  -H "Content-type: application/json" -X "POST" -d '{"net_asset_value":{"accountname":"scott","nav":24}}' "http://127.0.0.1:5522/net_asset_values.json"
+      %p 
+      %p The documentation for URLFetch was not exactly helpful.  (eg parameters versus body for a post message either seems correct). However create some rules to represent the data you want to post. Assign it to the body with the correct headers and send it. (Note the conversion of the rules to json usng ExportString)
+      :markdown
+        ##Mathematic code
+        Code:
+        
+            rules = "net_asset_value" -> {"accountname" -> "scott", "nav" -> 24 }
+            res = URLFetch[url,  "Body" -> ExportString[{rules}, "JSON"], 
+              "Method" -> "POST", 
+              "Headers" -> {"Content-type" -> "application/json"}]
+    .col-md-3
+      = haml :technote_menu, :layout => false
+

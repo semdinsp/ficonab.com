@@ -38,6 +38,38 @@ Date: 10 July 2011
                 plotDatabin[dbin, "fred"]}, {plotDatabin[dbin, 
                 "fred2"]}}, ImageSize -> Large] |>], 
                 "Daily"], "dailyDashBoardEmail"] ]
+                
+      %p Of course this is all changed.  Now you really need to use a driver block to get it working well. In the driver you set up the associatin and then you submit it as  a job using document generator. Timespecs are not generally accurate as yet. Note the cloudGet to do a Needs on the background tasks.  Email me with questions.
+      :markdown
+        ##Example code
+        Code:
+        
+            driver := 
+              Block[{results, data, monthly, shortid, monthlydata, lotrev, lotpay,
+                  lotnet, adbin},
+                monthlydata = fred`getMonth["summary"];
+                results = 
+                 Association["totalRev" -> data["Total"], 
+                  "runDate" :> DateString[], 
+                  "distCount" -> data["Distributor Count"], "monthly" -> monthly, 
+                  "databin" -> adbin, "monthlydata" -> monthlydata, 
+                  "txcount" -> data["Transaction Count"], 
+                  "avgDist" -> data["Avg"] 
+                  ];
+                results] &;
+            tplrunTime = 
+             DateObject[{_, _, _, 21}]; (* daily at some approximate time *)dailyDashTemplate = 
+             With[{ftemplatename = 
+                StringJoin[NotebookDirectory[], "FredTemplate.nb"], 
+               ccDestinations = {}}, 
+              CloudDeploy[ CloudGet[CloudObject["yyyyyyy.wl"]];
+               DocumentGenerator[File[ftemplatename], driver, 
+                tplrunTime,(*NotificationFunction \[Rule] All, *)
+                DeliveryFunction -> {{ 
+                    "uuuuuu@estormtech.com"} -> 
+                   "PDF"} ],
+               "dailyTemplateEmail"]  (*cloud deploy *)
+              ]  (* with *)
     .col-md-3
       = haml :technote_menu, :layout => false
 
