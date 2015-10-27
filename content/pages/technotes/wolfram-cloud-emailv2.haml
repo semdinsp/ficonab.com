@@ -8,13 +8,14 @@ Date: 10 July 2011
     .col-md-9  
       %h1 Sigh Version 2! Email via scheduled tasks (mathematica/wolfram) deployed to Wolfram Cloud
 
-      %p The scheduled task demos for Mathematica to run in the Wolfram Cloud are not very helpful if you want to use your own code.  It is not clear on how to get things working and where you need to include the functions.  In version 10.3 it broke again!  This time to get it working i had to save the functions to the cloud and then import them with CloudGet.  There was a super strange error that the functions had Global context in the cloud.
+      %p The scheduled task demos for Mathematica to run in the Wolfram Cloud are not very helpful if you want to use your own code.  It is not clear on how to get things working and where you need to include the functions.  In version 10.3 it broke again!  This time to get it working i had to save the functions to the cloud  (CloudSave) and then import them with CloudGet.  There was a super strange error that the functions had Global context in the cloud.
       %p "WITH" where i define the local variables separated by ,  (comma)
-      %p I define my modules (my functions) in the scheduled task and separate by ; (semi colon)
+      %p I define my modules (my functions) in the scheduled task and separate by ; (semi colon)  Despite the functions being defined in a context I had to save them distinctly to get it to work.
       
       :markdown
         ##Example code
         Code:
+        
             functionlist = 
              CloudSave[{yyyy`getAvailableJunk, 
                yyy`getJunkBalance}];  (* this saves the functions *)
@@ -23,11 +24,11 @@ Date: 10 July 2011
                 ccDestinations = {"yyyyy@ficonab.com"}, 
                 CloudDeploy[
                 ScheduledTask[
-                CloudGet[funcs];
+                CloudGet[funcs];  (* this gets the function definitions *)
                 SendMail[<|"To" -> $WolframID, "Cc" -> ccDestinations, 
                 "Subject" -> StringJoin["Daily Dash Report ", DateString[]], 
                 "Body" -> 
-                GraphicsGrid[{{plotDatabin[dbin, "revenue"], 
+                GraphicsGrid[{{getAvailableJunk[], 
                 plotDatabin[dbin, "fred"]}, {plotDatabin[dbin, 
                 "fred2"]}}, ImageSize -> Large] |>], 
                 "Daily"], "dailyDashBoardEmail"] ]
