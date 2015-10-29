@@ -10,7 +10,7 @@ Date: 29 October 2015
 
       %p Sadly every version in Mathematica 10 has required a new implementation of this.  And, of course, usage between different functions differs in my environment.
       %p A short summary to get DocumentGenerator to work:  1) CloudSave the functions 2) build a driver function and import the functions here using CloudGet. 3) Deploy the Document Generatr and also call the functions here. 4) You should test the template locally and then deploy to the cloud to save a lot of grief because if the template fails you don't see any logs. 5) I would recommend a ScheduledTask with a send email rather than the DocumentGenerator as it is much less idiosyncratic.   
-      %a(href="technotes/wolfram-cloud-email")
+      %a(href="/technotes/wolfram-cloud-emailv2")
         Email with cloud scheduled tasking. Working! :)
       %p Caveat  I have this working as per below.  For another variant the exact same code structure fails and I am experimenting with doing a CloudGet inside the template.
       
