@@ -1,0 +1,52 @@
+Categories: Technical Notes
+Template: home
+Summary: Wolfram cloud DocumentGenerator
+Date: 10 July 2011
+
+.container
+  .row
+    .col-md-9  
+      %h1 DocumentGenerator working in the cloud! (10.3)
+
+      %p Sadly every version in Mathematica 10 has required a new implementation of this.  And, of course, usage between different functions differs in my environment.
+      %p A short summary to get DocumentGenerator to work:  1) CloudSave the functions 2) build a driver function and import the functions here using CloudGet. 3) Deploy the Document Generatr and also call the functions here. 4) You should test the template locally and then deploy to the cloud to save a lot of grief because if the template fails you don't see any logs. 5) I would recommend a ScheduledTask with a send email rather than the DocumentGenerator as it is much less idiosyncratic.   
+      %a(href="technotes/wolfram-cloud-email")
+        Email with cloud scheduled tasking. Working! :)
+      %p Caveat  I have this working as per below.  For another variant the exact same code structure fails and I am experimenting with doing a CloudGet inside the template.
+      
+      :markdown
+        ##Example code
+        Code:
+        
+            Needs["estormdash`"];
+            templateFunctions = 
+              CloudSave[{fred`getT, fred`getMonth}];
+            driver3[funs_] := 
+              Block[{results, data, monthly, shortid, monthlydata,adbin},
+                CloudGet[funs];
+                data = fred`getTransactions[];
+                shortid = "xxxx";
+                monthly = fred`getMonth["transactions"];
+                results = 
+                 Association["totalRev" -> data["Total"], 
+                  "runDate" -> DateString[], 
+                  "distCount" -> data["Distributor Count"], "monthly" -> monthly
+                ];
+                results] &  ;
+            dailyDashTemplate = 
+             With[{funcsl = templateFunctions, 
+               ftemplatename = 
+                StringJoin[NotebookDirectory[], "XXXDashTemplate.nb"], 
+               tplrunTime = DateObject[{_, _, _, 21}], ccDestinations = {}, 
+               adriver3 := driver3[]
+               }, CloudDeploy[ CloudGet[funcsl];
+               DocumentGenerator[File[ftemplatename], adriver3[funcsl], 
+                tplrunTime, 
+                DeliveryFunction -> {"xxxx@yahoo.com.sg",  } -> "PDF"] ,
+               "dailyDashTemplate"   ]  (*cloud deploy *)
+              ]  (* with *)
+                
+      
+    .col-md-3
+      = haml :technote_menu, :layout => false
+

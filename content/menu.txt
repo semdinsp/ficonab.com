@@ -16,6 +16,7 @@ technotes
   technotes/ruby-databin-wolfram
   technotes/wolfram-cloud-email
   technotes/wolfram-cloud-emailv2
+  technotes/wolfram-document
   technotes/posting-rails-mathematica
   technotes/coffeescript
   technotes/nestacms-locales
