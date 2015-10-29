@@ -13,12 +13,12 @@ Date: 29 October 2015
       %a(href="/technotes/wolfram-cloud-emailv2")
         Email with cloud scheduled tasking. Working! :)
       %p Caveat  I have this working as per below.  For another variant the exact same code structure fails and I am experimenting with doing a CloudGet inside the template.
+      %p The concept for this DocumentGenerator(template,driver,timespec) is great and works well on the desktop. It is just truly idiosyncratic in the cloud particularly when you try to import your own local functions.
       
       :markdown
         ##Example code
         Code:
         
-            Needs["estormdash`"];
             templateFunctions = 
               CloudSave[{fred`getT, fred`getMonth}];
             driver3[funs_] := 
