@@ -1,0 +1,52 @@
+Categories: Technical Notes
+Template: home
+Summary: Wolfram and Cron
+Date: 7 November 2015
+
+.container
+  .row
+    .col-md-9
+      %h1 Wolfram Cron jobs
+      %p As you can see from other posts I can not get the scheduled jobs working in the cloud with any reliability.  I have decided to move my jobs to a raspberry pi and run them as cron jobs.
+     
+      %p It seems to work reasonably well.  The key issues were 1) to boot the pi into graphical user so that a graphics context was available. 2) run the commands with a sudo to pi and then setting the display correct.  It appears that a lot of the mathematica code needs a display to process emails.
+     
+      %p Eventually with the display I should be able to get Templates working and emailing.
+      
+      %pre
+        %code
+          DISPLAY=:0.0  wolfram -script filename
+     
+      %p Here is an example cron job.  The interesting thing is I pull the cron job down from the web so it is easy to update.  Yes it is ugly but it works.
+
+      %pre
+        %code
+          curl www.yyyy.com/wolfram/xxxx.html > xxxxx  ; wolfram -script xxxx
+
+      %p Alternatively You can use a script file just executes wolfram with sticky bit set to pi and has the following
+    
+    
+     
+    
+      %p Sample wolfram code (from the website). Note the Quit[] at the end.  The reason for the display magic above is that the SendMail seeemed to require a graphics process to manager the GraphicsGrid.  My estormSendMail just merges the default association and then calls SendMail[]
+      
+      
+
+      %pre
+        %code 
+          Needs["fred`"];
+          ccDestinations = {"blah@fred.com", };
+          bal = NumberForm[fred`getTelkomcelBalance[]["balance"], {5, 2}];
+          pinlist = fred`getAvailablePins[];
+          body = GraphicsGrid[{{Text[Style[StringJoin["Telkomcel Balance ", ToString[bal]], Blue, Bold, 18]]}, {Grid[Prepend[{#, pinlist[#]} & /@ Keys[pinlist], {"Pulsa Type",   "Current Available"}], Frame -> All, Background -> {None, {LightBlue, {LightYellow}}}]}}, ImageSize -> {Small, Large}] ;
+          estormSendMail[<|"To" -> "fred@fred.com", 
+          "Cc" -> ccDestinations, "From" -> "fred@fred.com", 
+          "Subject" -> 
+          StringJoin["Pulsa balance and pins status ", DateString[]], 
+          "Body" -> body|>];
+          Quit[];
+     
+        
+    .col-md-3
+      = haml :technote_menu, :layout => false
+

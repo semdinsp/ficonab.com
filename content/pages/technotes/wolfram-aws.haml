@@ -1,0 +1,25 @@
+Categories: Technical Notes
+Template: home
+Summary: Wolfram Mathematica and AWS
+Date: 7 November 2015
+
+.container
+  .row
+    .col-md-9
+      %h1 Wolfram AWS Amazon Web Services
+
+      %p A basic implementation of the Mathematica integrated with AWS is at the following github link.
+      
+      %a(href="https://github.com/semdinsp/aws")
+        github
+      
+      %p This allows you to send an email.  It can be enhanced to connect to other AWS servies as needed.  On the raspberry pi some of the normal mathematica calls had to be implemented.
+
+      %pre
+        %code 
+          Needs["aws`"];
+          awsSendEmail[mysecret, myawskey, {"scott@yyyy.com"}, {}, {}, \ "final subject" , "short contentes"]
+        
+    .col-md-3
+      = haml :technote_menu, :layout => false
+
