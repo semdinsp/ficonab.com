@@ -6,6 +6,7 @@ strategies
   strategies/lumpy_streams
 technotes
   technotes/index
+  technotes/systemd
   technotes/heroku
   technotes/postgres
   technotes/bunny-amqp
@@ -13,6 +14,8 @@ technotes
   technotes/bootstrapv3
   technotes/resque
   technotes/sendmail
+  technotes/wolfram-aws
+  technotes/wolfram-cron
   technotes/ruby-databin-wolfram
   technotes/wolfram-cloud-email
   technotes/wolfram-cloud-emailv2
