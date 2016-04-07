@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 ruby "2.1.5"
 gem 'sinatra'
 gem 'puma'
+gem 'heroku_rails_deflate', :group => :production
 #gem 'unicorn'
 # update to rvm gem 'sinatra', '1.3.6'
 #gem 'rack', '1.4.5'   # fix bug on rack on deployment server--test to see if this can be removed.
