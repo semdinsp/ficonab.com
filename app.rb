@@ -1,4 +1,3 @@
-require 'JSON'
 module Nesta
   class App
     not_found do
