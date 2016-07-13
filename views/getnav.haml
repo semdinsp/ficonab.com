@@ -1,2 +1,6 @@
 %h3 Nav
-%p 3
+- jsondata=JSON.parse(File.read("content/attachments/automated/nav.json"))
+- navdate,nav=[jsondata.first,jsondata.last]
+%h4
+  = nav
+  %small= "as of: #{navdate}"

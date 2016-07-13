@@ -14,11 +14,12 @@ Link text: Home page
       %p.lead
         :markdown
           An [algorithmic trading](/strategies) project using [Mathematica](/technotes) and integrated with [Interactive Brokers](/technotes).
+      = haml :getnav, :layout => false
   .row
     .col-offset-2.col-md-4
       %a(href="/about" ) 
         %p Performance Summary
-        %img{:src=>"attachments/OverallResults.jpg", :width => "240", :height=>"180", :alt=>"Summary"}
+        %img{:src=>"attachments/automated/summary.jpg", :width => "240", :height=>"180", :alt=>"Summary"}
     .col-offset-1.col-md-4
       %a(href="/strategies/geographic") 
         %p Geographic Strategy
