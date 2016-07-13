@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 ruby "2.1.5"
 gem 'sinatra'
 gem 'puma'
+gem 'json'
 # gem 'heroku_rails_deflate', :group => :production
 #gem 'unicorn'
 # update to rvm gem 'sinatra', '1.3.6'
