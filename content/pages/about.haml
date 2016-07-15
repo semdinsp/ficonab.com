@@ -45,10 +45,11 @@ Link text: About
       = haml :strategy_menu, :layout => false
 
   .row
-    .col-md-9
+    .col-md-8
       %h3 Latest Technical Notes
       = article_summaries(latest_articles)
     .col-md-3
+      = haml :technote_menu, :layout => false
       /= haml :strategy_menu, :layout => false
 
 
