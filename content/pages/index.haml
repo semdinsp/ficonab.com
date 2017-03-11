@@ -35,7 +35,9 @@ Link text: Home page
         %img{:src=>"attachments/bengraham.jpeg", :width => "150", :height=>"200"}
   .row
     .col-offset-3.col-md-8
-      %h1 Quotes we enjoy
+      %h1 
+        %a(href="quotes")
+          Quotes we enjoy
       = haml :quotes, :layout => false
 
 
