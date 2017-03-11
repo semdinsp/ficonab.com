@@ -24,3 +24,4 @@ technotes
   technotes/coffeescript
   technotes/nestacms-locales
 contact
+quotes

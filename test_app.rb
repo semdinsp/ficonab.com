@@ -26,7 +26,7 @@ class FiconabTest < Test::Unit::TestCase
 
   def test_key_pages
      
-     pagelist=["contact","about","technotes","strategies","strategies/value", "/"]
+     pagelist=["contact","about","technotes","strategies","strategies/value", "/","quotes"]
      puts "testing top level pages #{pagelist.inspect}"
      pagelist.each { |page| 
           get page

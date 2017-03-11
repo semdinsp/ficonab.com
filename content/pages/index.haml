@@ -28,10 +28,14 @@ Link text: Home page
     .col-offset-2.col-md-4
       %a(href="/technotes") 
         %p Technology
-        %img{:src=>"attachments/mathematica.png", :width => "200", :height=>"140"}
+        %img{:src=>"attachments/mathematica2.jpg", :width => "200", :height=>"140"}
     .col-offset-1.col-md-4  
       %a(href="/strategies/value") 
         %p Value
         %img{:src=>"attachments/bengraham.jpeg", :width => "150", :height=>"200"}
+  .row
+    .col-offset-3.col-md-8
+      %h1 Quotes we enjoy
+      = haml :quotes, :layout => false
 
 
