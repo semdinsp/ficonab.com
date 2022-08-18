@@ -3,9 +3,9 @@
 app = "ficonab-com"
 kill_signal = "SIGINT"
 kill_timeout = 5
-# scott processes = []
-[processes]
-  web = "bundle exec falcon serve --count 3  -b [::] -p 8080"
+processes = []
+# [processes]
+#   web = "bundle exec falcon serve --count 3  -b [::] -p 8080"
 
 [build]
   builder = "paketobuildpacks/builder:base"
@@ -27,7 +27,7 @@ kill_timeout = 5
 [[services]]
   http_checks = []
   internal_port = 8080
-  processes = ["web"]
+  processes = ["app"]
   protocol = "tcp"
   script_checks = []
   [services.concurrency]
