@@ -3,7 +3,9 @@
 app = "ficonab-com"
 kill_signal = "SIGINT"
 kill_timeout = 5
-processes = []
+# scott processes = []
+[processes]
+web = "bundle exec falcon serve --count 3  -b [::] -p 8080"
 
 [build]
   builder = "paketobuildpacks/builder:base"
@@ -16,7 +18,7 @@ processes = []
 [env]
   PORT = "8080"
   # orig SERVER_COMMAND = "bundle exec puma -C config/puma.rb"
-  SERVER_COMMAND = "bundle exec falcon serve --count 3 -b http://168.220.85.235:${PORT:-3000}"
+  SERVER_COMMAND = "bundle exec falcon serve --count 3  -b [::] -p 8080
 
 [experimental]
   allowed_public_ports = []
@@ -25,7 +27,7 @@ processes = []
 [[services]]
   http_checks = []
   internal_port = 8080
-  processes = ["app"]
+  processes = ["web"]
   protocol = "tcp"
   script_checks = []
   [services.concurrency]
