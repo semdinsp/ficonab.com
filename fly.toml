@@ -5,7 +5,7 @@ kill_signal = "SIGINT"
 kill_timeout = 5
 # scott processes = []
 [processes]
-web = "bundle exec falcon serve --count 3  -b [::] -p 8080"
+  web = "bundle exec falcon serve --count 3  -b [::] -p 8080"
 
 [build]
   builder = "paketobuildpacks/builder:base"
