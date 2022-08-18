@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 # update to rvm gem 'rack', '1.4.5'
-ruby "3.1.0"
+ruby "3.1.1"
 gem 'sinatra'
 gem 'falcon'
 gem 'json'
