@@ -16,7 +16,7 @@ processes = []
 [env]
   PORT = "8080"
   # orig SERVER_COMMAND = "bundle exec puma -C config/puma.rb"
-  SERVER_COMMAND = "bundle exec falcon serve --count 3 -b http://0.0.0.0:${PORT:-3000}"
+  SERVER_COMMAND = "bundle exec falcon serve --count 3 -b http://168.220.85.235:${PORT:-3000}"
 
 [experimental]
   allowed_public_ports = []
