@@ -17,7 +17,6 @@ processes = []
 
 [env]
   PORT = "8080"
-  # orig SERVER_COMMAND = "bundle exec puma -C config/puma.rb"
   SERVER_COMMAND = "bundle exec falcon serve --count 3  -b http://[::]:8080"
 
 [experimental]

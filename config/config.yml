@@ -55,7 +55,7 @@ content: content
 # google_analytics_code: "UA-???????-?"
 #google_analytics_code: "UA-3157102-1"
 google_analytics_code: "G-PY5CCDRK8C"
-gauges_site_id: "51d441d0613f5d20670000bd"
+# SCOTT gauges_site_id: "51d441d0613f5d20670000bd"
 # Overriding "cache" and "content" in production is recommended if you're
 # deploying Nesta to your own server (but see the deployment documentation
 # on the Nesta site). Setting google_analytics_code in production is
