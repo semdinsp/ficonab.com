@@ -76,7 +76,7 @@ GEM
     protocol-rack (0.1.6)
       protocol-http (~> 0.23.4)
       rack (>= 1.0)
-    rack (2.2.4)
+    rack (2.2.6.4)
     rack-protection (2.2.2)
       rack
     rack-test (2.0.2)
